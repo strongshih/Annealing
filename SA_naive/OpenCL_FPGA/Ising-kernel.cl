@@ -29,7 +29,6 @@ __kernel void ising(__global const int* restrict couplings,
 	for (int t = 0; t < TIMES; t++) {
 		for (int i = 0; i < N; i++)
 			spins[i] = ((xorshift32(&randnum) & 1) << 1) - 1; 
-		#pragma loop_coalesce 2
 		for (int i = 0; i < N; i++) {
 			int s = 0;
 			for (int j = 0; j < N; j++) {
@@ -69,7 +68,6 @@ __kernel void ising(__global const int* restrict couplings,
 
 		// calculate result
 		int E = 0;
-		#pragma loop_coalesce 2
 		for (int i = 0; i < N; i++) {
 			int d = spins[i];
 			for (int j = i; j < N; j++) {
