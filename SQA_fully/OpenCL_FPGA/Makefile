@@ -4,7 +4,7 @@ AOCL_LINK_CONFIG=$(shell aocl link-config)
 all: Ising Ising.o Ising-kernel.aocx
 
 Ising : Ising.o
-	gcc -o Ising Ising.o $(AOCL_LINK_CONFIG)
+	gcc -o Ising Ising.o $(AOCL_LINK_CONFIG) -lm
 
 Ising.o : Ising.c
 	gcc -c Ising.c $(AOCL_COMPILE_CONFIG)
