@@ -1,11 +1,11 @@
-#define N 16384
-#define N_4 4096
-#define EDGE 128
-#define EDGE_SHIFT 7
-#define EDGE_2 64
-#define EDGE_SHIFT_2 6
-#define BITMASK 0x7f
-#define BITMASK_2 0x3f
+#define N 1024
+#define N_4 256
+#define EDGE 32
+#define EDGE_SHIFT 5
+#define EDGE_2 16
+#define EDGE_SHIFT_2 4
+#define BITMASK 0x1f
+#define BITMASK_2 0xf
 #define SWEEP 500
 
 __kernel void sa(__global int *restrict couplings,
@@ -45,15 +45,16 @@ __kernel void sa(__global int *restrict couplings,
  */
 	int firstUnit[4] = {0, 1, EDGE, EDGE+1};
 	for (int t = 0; t < SWEEP; t++) {
-		float currnetR = lrandom[t];
+		float currentR = lrandom[t];
 		for (int s = 0; s < 4; s++) {
 			int currentUnit = firstUnit[s];
 			#pragma ivdep array(lspin)
+			#pragma unroll 2
 			for (int n = 0; n < N_4; n++) {
 				int row = n>>(EDGE_SHIFT_2);
 				int col = n&(BITMASK_2);
-				int currentSpin = (currentUnit + ((row<<EDGE_SHIFT)<<1) + (col<<1));
-				int energy = 0;
+				int currentSpin = (currentUnit + ((row<<1)<<EDGE_SHIFT) + (col<<1));
+				int diff = 0;
 				
 				int edge = currentSpin-EDGE-1;
 				int s0 = ((currentSpin&BITMASK) == 0 || currentSpin < EDGE) ? 
@@ -86,10 +87,10 @@ __kernel void sa(__global int *restrict couplings,
 				edge = currentSpin+EDGE+1;
 				int s7 = (((currentSpin+1)&BITMASK) == 0 || currentSpin >= EDGE*(EDGE-1)) ? 
 							0 : lspin[edge]*localJ[currentSpin][7];
-				energy = s0 + s1 + s2 + s3 + s4 + s5 + s6 + s7 + lh[currentSpin];
-				energy *= lspin[currentSpin];
+				diff = s0 + s1 + s2 + s3 + s4 + s5 + s6 + s7 + lh[currentSpin];
+				diff *= lspin[currentSpin];
 				
-				if (energy < currnetR)
+				if (diff < currentR)
 					lspin[currentSpin] *= -1;
 			}
 		}

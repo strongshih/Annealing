@@ -18,10 +18,10 @@ endif
 
 test :
 ifdef emu
-	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./king ./king-kernel.aocx tests/16384.txt
+	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./king ./king-kernel.aocx tests/1024.txt
 else
 	aocl program acl0 king-kernel.aocx
-	./king ./king-kernel.aocx tests/16384.txt
+	./king ./king-kernel.aocx tests/1024.txt
 endif
 
 clean: 

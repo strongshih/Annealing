@@ -1,0 +1,3727 @@
+{
+  "columns":
+  ["", "Pipelined", "II", "Bottleneck", "Details"]
+  , "children":
+  [
+    {
+      "name":"Kernel: sa"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+            , "line":16
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"4X Partially unrolled sa.B1"
+          , "data":
+          ["Yes", "~1", "n/a"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":24
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":24
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":26
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"II is an approximation."
+            }
+            , {
+              "type":"text"
+              , "text":"II is an approximation due to the following stallable instruction:"
+              , "links":
+              [
+                {
+                  "view":"Verification statistics"
+                }
+              ]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"27"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"Fully unrolled loop"
+              , "data":
+              ["n/a", "n/a", "n/a"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                    , "line":26
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Unrolled by #pragma unroll"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Unrolled by #pragma unroll"
+                }
+              ]
+              , "children":
+              [
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sa.B2"
+          , "data":
+          ["Yes", "~1", "n/a"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":29
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":29
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":30
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"II is an approximation."
+            }
+            , {
+              "type":"text"
+              , "text":"II is an approximation due to the following stallable instruction:"
+              , "links":
+              [
+                {
+                  "view":"Verification statistics"
+                }
+              ]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"30"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+          ]
+        }
+        , {
+          "name":"sa.B3"
+          , "data":
+          ["Yes", "~1", "n/a"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":31
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":31
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":32
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"II is an approximation."
+            }
+            , {
+              "type":"text"
+              , "text":"II is an approximation due to the following stallable instruction:"
+              , "links":
+              [
+                {
+                  "view":"Verification statistics"
+                }
+              ]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"32"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+          ]
+        }
+        , {
+          "name":"sa.B4"
+          , "data":
+          ["Yes", "~1", "n/a"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":33
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":33
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":34
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"II is an approximation."
+            }
+            , {
+              "type":"text"
+              , "text":"II is an approximation due to the following stallable instruction:"
+              , "links":
+              [
+                {
+                  "view":"Verification statistics"
+                }
+              ]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"34"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+          ]
+        }
+        , {
+          "name":"sa.B5"
+          , "data":
+          ["Yes", ">=1", "n/a"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":47
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":47
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"61"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"61"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"61"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"61"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"65"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"65"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"65"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"65"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"69"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"69"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"69"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"69"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"73"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"73"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"73"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"73"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"77"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"77"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"77"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"77"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"81"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"81"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"81"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"81"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"85"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"85"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"85"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"85"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"89"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"89"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"89"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"89"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"91"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"91"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"91"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"91"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"61"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"65"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"69"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"73"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"77"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"81"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"85"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"89"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"91"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across sa.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"61"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"65"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"69"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"73"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"77"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"81"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"85"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"89"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"91"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"94"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"brief"
+              , "text":"Serial exe: Memory dependency"
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.altera.com/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"sa.B6"
+              , "data":
+              ["Yes", ">=1", "n/a"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                    , "line":49
+                  }
+                ]
+                , [
+                  {
+                    "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                    , "line":49
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"61"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"61"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"61"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"61"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"65"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"65"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"65"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"65"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"69"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"69"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"69"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"69"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"73"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"73"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"73"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"73"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"77"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"77"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"77"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"77"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"81"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"81"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"81"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"81"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"85"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"85"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"85"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"85"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"89"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"89"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"89"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"89"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"91"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"91"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"91"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"91"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"61"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"65"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"69"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"73"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"77"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"81"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"85"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"89"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"91"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across sa.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"61"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"65"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"69"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"73"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"77"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"81"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"85"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"89"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"91"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                          , "line":"94"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"brief"
+                  , "text":"Serial exe: Memory dependency"
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"2X Partially unrolled sa.B7"
+                  , "data":
+                  ["Yes", "1", "n/a"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                        , "line":53
+                      }
+                    ]
+                    , [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                        , "line":53
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"4X Partially unrolled sa.B10"
+          , "data":
+          ["Yes", "~1", "n/a"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":99
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":99
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                , "line":100
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"II is an approximation."
+            }
+            , {
+              "type":"text"
+              , "text":"II is an approximation due to the following stallable instruction:"
+              , "links":
+              [
+                {
+                  "view":"Verification statistics"
+                }
+              ]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/sam/Desktop/Annealing/SA_king/OpenCL_FPGA/king-kernel.cl"
+                      , "line":"100"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+          ]
+        }
+      ]
+    }
+  ]
+}

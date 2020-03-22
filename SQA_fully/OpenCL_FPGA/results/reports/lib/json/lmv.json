@@ -1,0 +1,881 @@
+{
+  "nodes":
+  [
+    {
+      "type":"kernel"
+      , "id":2
+      , "name":"sqa"
+      , "children":
+      [
+        {
+          "type":"inst"
+          , "id":18
+          , "name":"Store"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":26
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Stores to":"lspin"
+              , "Start Cycle":"10"
+              , "Latency":"1"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":19
+          , "name":"Store"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":26
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Stores to":"lspin"
+              , "Start Cycle":"10"
+              , "Latency":"1"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":22
+          , "name":"Store"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":35
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Stores to":"lcouplings"
+              , "Start Cycle":"9"
+              , "Latency":"1"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":23
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":54
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lcouplings"
+              , "Start Cycle":"2"
+              , "Latency":"3"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":24
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":69
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lspin"
+              , "Start Cycle":"6"
+              , "Latency":"4"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":25
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":74
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lspin"
+              , "Start Cycle":"30"
+              , "Latency":"4"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":26
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":73
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lspin"
+              , "Start Cycle":"6"
+              , "Latency":"4"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":27
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":72
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lspin"
+              , "Start Cycle":"6"
+              , "Latency":"4"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":28
+          , "name":"Store"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":80
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Stores to":"lspin"
+              , "Start Cycle":"57"
+              , "Latency":"1"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":29
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":91
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lspin"
+              , "Start Cycle":"3"
+              , "Latency":"4"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":30
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":91
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lspin"
+              , "Start Cycle":"3"
+              , "Latency":"4"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":31
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":91
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lspin"
+              , "Start Cycle":"3"
+              , "Latency":"4"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"inst"
+          , "id":32
+          , "name":"Load"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":91
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Width":"32 bits"
+              , "Type":"Pipelined"
+              , "Stall-free":"Yes"
+              , "Loads from":"lspin"
+              , "Start Cycle":"3"
+              , "Latency":"4"
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Load-Store Units"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"memtype"
+          , "id":51
+          , "name":"Local Memory"
+          , "children":
+          [
+            {
+              "type":"memsys"
+              , "id":52
+              , "name":"lspin"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                    , "line":16
+                  }
+                ]
+              ]
+              , "children":
+              [
+                {
+                  "type":"bank"
+                  , "id":53
+                  , "name":"Bank 0"
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":16
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "type":"port"
+                      , "id":54
+                      , "name":"R"
+                    }
+                    , {
+                      "type":"port"
+                      , "id":56
+                      , "name":"R"
+                    }
+                    , {
+                      "type":"port"
+                      , "id":58
+                      , "name":"R"
+                    }
+                    , {
+                      "type":"port"
+                      , "id":60
+                      , "name":"RW"
+                    }
+                    , {
+                      "type":"port"
+                      , "id":62
+                      , "name":"R"
+                    }
+                    , {
+                      "type":"port"
+                      , "id":63
+                      , "name":"W"
+                    }
+                    , {
+                      "type":"port"
+                      , "id":65
+                      , "name":"W"
+                    }
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"table"
+                      , "Total number of ports per bank":"7"
+                      , "Number of read ports per bank":"4"
+                      , "Number of write ports per bank":"2"
+                      , "Number of shared ports per bank":"1"
+                      , "Total replication":"2"
+                    }
+                  ]
+                }
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Requested size":"2048 bytes"
+                  , "Implemented size":"4096 bytes"
+                  , "Number of banks":"1"
+                  , "Bank width":"32 bits"
+                  , "Bank depth":"512 words"
+                  , "Total replication":"2"
+                  , "Additional Information":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Replicated 2 times to efficiently support multiple accesses"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Running memory at 2x clock to support more concurrent ports"
+                    }
+                  ]
+                  , "Reference":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Local Memory"
+                          , "link":"https://www.altera.com/documentation/mwh1391807516407.html#chn1469549457114"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"memsys"
+              , "id":66
+              , "name":"lcouplings"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                    , "line":18
+                  }
+                ]
+              ]
+              , "children":
+              [
+                {
+                  "type":"bank"
+                  , "id":67
+                  , "name":"Bank 0"
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":18
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "type":"port"
+                      , "id":68
+                      , "name":"R"
+                    }
+                    , {
+                      "type":"port"
+                      , "id":69
+                      , "name":"W"
+                    }
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"table"
+                      , "Total number of ports per bank":"2"
+                      , "Number of read ports per bank":"1"
+                      , "Number of write ports per bank":"1"
+                      , "Total replication":"1"
+                    }
+                  ]
+                }
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Requested size":"65536 bytes"
+                  , "Implemented size":"65536 bytes"
+                  , "Number of banks":"1"
+                  , "Bank width":"32 bits"
+                  , "Bank depth":"16384 words"
+                  , "Total replication":"1"
+                  , "Reference":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Local Memory"
+                          , "link":"https://www.altera.com/documentation/mwh1391807516407.html#chn1469549457114"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "type":"arb"
+          , "id":55
+          , "name":"SHARE"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Additional Information":"Mutually exclusive accesses, no stalls"
+            }
+          ]
+        }
+        , {
+          "type":"arb"
+          , "id":57
+          , "name":"SHARE"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Additional Information":"Mutually exclusive accesses, no stalls"
+            }
+          ]
+        }
+        , {
+          "type":"arb"
+          , "id":59
+          , "name":"SHARE"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Additional Information":"Mutually exclusive accesses, no stalls"
+            }
+          ]
+        }
+        , {
+          "type":"arb"
+          , "id":61
+          , "name":"SHARE"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Additional Information":"Mutually exclusive accesses, no stalls"
+            }
+          ]
+        }
+        , {
+          "type":"arb"
+          , "id":64
+          , "name":"SHARE"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Additional Information":"Mutually exclusive accesses, no stalls"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  , "links":
+  [
+    {
+      "from":55
+      , "to":24
+    }
+    , {
+      "from":55
+      , "to":29
+    }
+    , {
+      "from":54
+      , "to":55
+    }
+    , {
+      "from":57
+      , "to":25
+    }
+    , {
+      "from":57
+      , "to":31
+    }
+    , {
+      "from":56
+      , "to":57
+    }
+    , {
+      "from":59
+      , "to":26
+    }
+    , {
+      "from":59
+      , "to":32
+    }
+    , {
+      "from":58
+      , "to":59
+    }
+    , {
+      "from":19
+      , "to":61
+    }
+    , {
+      "from":61
+      , "to":27
+    }
+    , {
+      "from":61
+      , "to":60
+    }
+    , {
+      "from":60
+      , "to":61
+    }
+    , {
+      "from":62
+      , "to":30
+    }
+    , {
+      "from":18
+      , "to":64
+    }
+    , {
+      "from":28
+      , "to":64
+    }
+    , {
+      "from":64
+      , "to":63
+    }
+    , {
+      "from":19
+      , "to":65
+    }
+    , {
+      "from":68
+      , "to":23
+    }
+    , {
+      "from":22
+      , "to":69
+    }
+  ]
+}

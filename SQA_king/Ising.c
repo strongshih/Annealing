@@ -9,16 +9,42 @@
 #define AOCL_ALIGNMENT 64
 #define MAXDEVICE 10
 #define MAXK 50000000
-#define N 128
+#define EDGE 32
+#define N 1024
 #define M 4
 #define SWEEP 500
-#define TIMES 1
+#define TIMES 10
 #define NANO2SECOND 1000000000.0
 
 void usage() {
 	printf("Usage:\n");
 	printf("       ./Ising-opencl [kernel file] [spin configuration]\n");
 	exit(0);
+}
+
+int relation (int a, int b) {
+    switch (b-a) {
+        case 0:
+            return 8;
+        case -EDGE-1:
+            return 0;
+        case -EDGE:
+            return 1;
+        case -EDGE+1:
+            return 2;
+        case -1:
+            return 3;
+        case 1:
+            return 4;
+        case EDGE-1:
+            return 5;
+        case EDGE:
+            return 6;
+        case EDGE+1:
+            return 7;
+        default:
+            return -1;
+    }
 }
 
 unsigned char kernelBuffer[MAXK];
@@ -92,10 +118,14 @@ int main (int argc, char *argv[]) {
 	printf("Build kernel completes\n");
 
 	// Prepare problems input
-	cl_int* couplings = (cl_int*)malloc(N * N * sizeof(cl_int));
-	posix_memalign((void*)&couplings, AOCL_ALIGNMENT, N*N*sizeof(cl_int));
+	cl_int* couplings = (cl_int*)malloc(8 * N * sizeof(cl_int));
+	posix_memalign((void*)&couplings, AOCL_ALIGNMENT, 8*N*sizeof(cl_int));
 	assert(couplings != NULL);
-	memset(couplings, '\0', N*N*sizeof(int));
+	memset(couplings, '\0', 8*N*sizeof(int));
+	cl_int* fields = (cl_int*)malloc(N * sizeof(cl_int));
+    posix_memalign((void*)&fields, AOCL_ALIGNMENT, N*sizeof(cl_int));
+    assert(fields != NULL);
+    memset(fields, '\0', N*sizeof(int));
 	cl_int* spin_in = (cl_int*)malloc(M * N * sizeof(cl_int));
 	posix_memalign((void*)&spin_in, AOCL_ALIGNMENT, M*N*sizeof(cl_int));
 	assert(spin_in != NULL);
@@ -110,25 +140,38 @@ int main (int argc, char *argv[]) {
 	assert(Jtrans != NULL);
 
 	// Read couplings file 
-	FILE *instance = fopen(argv[2], "r");
-	assert(instance != NULL);
-	int a, b, w;
-	fscanf(instance, "%d", &a);
-	while (!feof(instance)) {
-		fscanf(instance, "%d%d%d", &a, &b, &w);
-		couplings[a * N + b] = w;
-		couplings[b * N + a] = w;
-	}
+    FILE *instance = fopen(argv[2], "r");
+    assert(instance != NULL);
+    int a, b, w;
+    fscanf(instance, "%d", &a);
+    while (!feof(instance)) {
+        fscanf(instance, "%d%d%d", &a, &b, &w);
+        int r = relation(a, b);
+        if (r == -1) {
+            assert(-1);
+        } else if (r == 8) {
+            fields[a] = w;
+        } else {
+            couplings[8*a+r] = w;
+            r = relation(b, a);
+            couplings[8*b+r] = w;
+        }
+    }
 	fclose(instance);
 	printf("Finish reading instance\n");
 
 	// Create Buffer (Pass data to device buffer)
 	cl_mem buffer_couplings = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, 
-			N * N * sizeof(cl_int), couplings, &status);
+			8 * N * sizeof(cl_int), couplings, &status);
 	assert(status == CL_SUCCESS);
+	cl_mem buffer_fields = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
+            N * sizeof(cl_int), fields, &status);
+    assert(status == CL_SUCCESS);
 		
 	// Parameter Linking: link allocated buffers to program's (kernel.cl) function's parametes
 	status = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void*)&buffer_couplings);
+	assert(status == CL_SUCCESS);
+	status = clSetKernelArg(kernel, 5, sizeof(cl_mem), (void*)&buffer_fields);
 	assert(status == CL_SUCCESS);
 
 	// start annealing
@@ -187,10 +230,11 @@ int main (int argc, char *argv[]) {
 			}
 
 			cl_event event;
-			status = clEnqueueTask(commandQueue, kernel, 0, NULL, &event);
+			status = clEnqueueTask(commandQueue, kernel, 0, NULL, NULL);
 			assert(status == CL_SUCCESS);
 			clFinish(commandQueue);
 			
+			/*
 			clWaitForEvents(1, &event);
 			cl_ulong tQ, tSub, tS, tE;
 			clGetEventProfilingInfo(event, CL_PROFILING_COMMAND_QUEUED, 
@@ -204,18 +248,29 @@ int main (int argc, char *argv[]) {
 			printf("Queued time %f (s)\n", (tSub-tQ)/1000000000.0);
 			printf("Submission time %f (s)\n", (tS-tSub)/1000000000.0);
 			printf("Execution time %f (s)\n", (tE-tS)/1000000000.0);
+			*/
 			beta += increase;
+			clReleaseMemObject(buffer_randomLogT);
+        	clReleaseMemObject(buffer_Jtrans);
 		}
 
 		// Get Result from device
-		status = clEnqueueReadBuffer(commandQueue, buffer_spin_out, CL_TRUE, 0, M* N * sizeof(cl_int),
+		status = clEnqueueReadBuffer(commandQueue, buffer_spin_out, CL_TRUE, 0, M * N * sizeof(cl_int),
 				spin_out, 0, NULL, NULL);
-		for (int i = 0; i < N; i++) {
-			results[x] += -spin_out[i] * couplings[i*N+i];
-			for (int j = i+1; j < N; j++) 
-				results[x] += -spin_out[i] * spin_out[j] * couplings[i*N+j];
-		}
 		assert(status == CL_SUCCESS);
+
+		for (int i = 0; i < N; i++)
+            for (int j = i; j < N; j++) {
+                int r = relation(i, j);
+                if (r == -1) continue;
+                if (r == 8)
+                    results[x] += -spin_out[i] * fields[i];
+                else
+                    results[x] += -spin_out[i] * spin_out[j] * couplings[8*i+r];
+            }
+
+		clReleaseMemObject(buffer_spin_in);
+		clReleaseMemObject(buffer_spin_out);
 	}
 	gettimeofday(&timeEnd, NULL);
 
@@ -233,6 +288,11 @@ int main (int argc, char *argv[]) {
 
 	// Release Objects
 	free(couplings);
+	free(fields);
+	free(Jtrans);
+	free(randomLogT);
+	free(spin_in);
+	free(spin_out);
 	clReleaseContext(context);
 	clReleaseCommandQueue(commandQueue);
 	clReleaseProgram(program);

@@ -1,4 +1,3 @@
-#define CL_USE_DEPRECATED_OPENCL_1_2_APIS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,10 +8,10 @@
 
 #define MAXDEVICE 10
 #define MAXK 5000000
-#define N 16384
-#define EDGE 128
+#define N 1024
+#define EDGE 32
 #define SWEEP 500
-#define TIMES 100
+#define TIMES 50
 #define NANO2SECOND 1000000000.0
 #define AOCL_ALIGNMENT 64
 
@@ -245,15 +244,15 @@ int main (int argc, char *argv[]) {
 		assert(status == CL_SUCCESS);
 		clReleaseMemObject(buffer_randomLogT);
 		clReleaseMemObject(buffer_spin_in);
-		for (int i = 0; i < N; i++) 
-			for (int j = i; j < N; j++) {
+		for (int i = 0; i < N; i++) { 
+			results[x] += -spin_out[i] * fields[i];
+			for (int j = i+1; j < N; j++) {
 				int r = relation(i, j);
-				if (r == -1) continue;
-				if (r == 8)
-					results[x] += -spin_out[i]*fields[i];
-				else
-					results[x] += -spin_out[i] * spin_out[j] * couplings[8*i+r];
+				if (r == -1)
+					continue;
+				results[x] += -spin_out[i] * spin_out[j] * couplings[8*i+r];
 			}
+		}
 	}
 	gettimeofday(&timeEnd, NULL);
 

@@ -1,0 +1,3083 @@
+{
+  "columns":
+  ["", "ALUTs", "FFs", "RAMs", "DSPs", "Details"]
+  , "debug_enabled":"true"
+  , "type":"module"
+  , "total_percent":
+  [26.764, 17.8566, 10.6624, 28.3607, 1.16959]
+  , "total":
+  [40556, 48433, 346, 4]
+  , "name":"Kernel System"
+  , "max_resources":
+  [227120, 454240, 1220, 342]
+  , "children":
+  [
+    {
+      "name":"Board interface"
+      , "type":"resource"
+      , "data":
+      [24256, 20822, 143, 0]
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Platform interface logic."
+        }
+      ]
+    }
+    , {
+      "name":"Global interconnect"
+      , "type":"resource"
+      , "data":
+      [1384, 3415, 10, 0]
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Global interconnect for 5 global loads and 4 global stores. Reduce number of global loads and stores to simplify global interconnect."
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Global Memory Interconnect"
+              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#hnj1476724450050"
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"sqa"
+      , "compute_units":1
+      , "type":"function"
+      , "total_percent":
+      [11.3892, 6.56745, 5.3267, 15.8197, 1.16959]
+      , "total_kernel_resources":
+      [14916, 24196, 193, 4]
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Number of compute units: 1"
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"Function overhead"
+          , "type":"resource"
+          , "data":
+          [1574, 1505, 0, 0]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Kernel dispatch logic."
+            }
+          ]
+        }
+        , {
+          "name":"Coalesced Private Variables: \n - 'count' (Ising-kernel.cl:43)\n - 'index' (Ising-kernel.cl:53)"
+          , "type":"resource"
+          , "data":
+          [24, 101, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":43
+              }
+            ]
+            , [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":53
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 and depth 1"
+            }
+          ]
+        }
+        , {
+          "name":"Ising-kernel.cl:16 (lspin)"
+          , "type":"resource"
+          , "data":
+          [33, 384, 4, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":16
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Private memory":"Good but replicated"
+              , "Requested size":"2048 bytes"
+              , "Implemented size":"4096 bytes"
+              , "Number of banks":"1"
+              , "Bank width":"32 bits"
+              , "Bank depth":"512 words"
+              , "Total replication":"2"
+              , "Clock":"Running memory at 2x clock to support more concurrent ports"
+              , "Additional information":
+              [
+                {
+                  "type":"text"
+                  , "text":"Requested size 2048 bytes, implemented size 4096 bytes, replicated 2 times total, stall-free, 8 reads and 3 writes. "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Replicated 2 times to efficiently support multiple accesses. To reduce this replication factor, reduce number of read and write accesses."
+                }
+              ]
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information."
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Local Memory"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#chn1469549457114"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Private memory implemented in on-chip block RAM."
+            }
+          ]
+        }
+        , {
+          "name":"Ising-kernel.cl:18 (lcouplings)"
+          , "type":"resource"
+          , "data":
+          [0, 0, 64, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":18
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Local memory":"Optimal"
+              , "Requested size":"65536 bytes"
+              , "Implemented size":"65536 bytes"
+              , "Number of banks":"1"
+              , "Bank width":"32 bits"
+              , "Bank depth":"16384 words"
+              , "Total replication":"1"
+              , "Additional information":"Requested size 65536 bytes, implemented size 65536 bytes, stall-free, 1 read and 1 write. "
+              , "Reference":
+              [
+                {
+                  "type":"text"
+                  , "text":"See %L for more information."
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Local Memory"
+                      , "link":"https://www.altera.com/documentation/mwh1391807516407.html#chn1469549457114"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'i' (Ising-kernel.cl:25)"
+          , "type":"resource"
+          , "data":
+          [24, 101, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":25
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 and depth 1"
+            }
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'i' (Ising-kernel.cl:34)"
+          , "type":"resource"
+          , "data":
+          [24, 101, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":34
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 and depth 1"
+            }
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'j' (Ising-kernel.cl:23)"
+          , "type":"resource"
+          , "data":
+          [7, 36, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":23
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 and depth 1"
+            }
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'j' (Ising-kernel.cl:88)"
+          , "type":"resource"
+          , "data":
+          [24, 101, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":88
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 and depth 1"
+            }
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'lfield' (Ising-kernel.cl:14)"
+          , "type":"resource"
+          , "data":
+          [28, 144, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":14
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"4 registers of width 32 and depth 1"
+            }
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'localJ' (Ising-kernel.cl:15)"
+          , "type":"resource"
+          , "data":
+          [7, 206, 3, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":15
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Shift Register (4 or fewer tap points)"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 8 and depth 1"
+            }
+            , {
+              "type":"text"
+              , "text":"2 registers of width 32 and depth 128"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 and depth 129"
+            }
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'm' (Ising-kernel.cl:62)"
+          , "type":"resource"
+          , "data":
+          [7, 36, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                , "line":62
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 and depth 1"
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B0"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [0, 32, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:20"
+                  , "type":"resource"
+                  , "data":
+                  [0, 32, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":20
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [5, 2, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [5, 2, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:20"
+                  , "type":"resource"
+                  , "data":
+                  [323, 583, 6, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":20
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [323, 583, 6, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Burst-coalesced LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B1"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [23, 55, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:23"
+                  , "type":"resource"
+                  , "data":
+                  [22, 55, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":23
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [1, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [103, 50, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:23"
+                  , "type":"resource"
+                  , "data":
+                  [42, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":23
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"8-bit Integer Add"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [9, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B10"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [508, 761, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [508, 761, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [71, 145, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:88"
+                  , "type":"resource"
+                  , "data":
+                  [55, 130.333, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":88
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:90"
+                  , "type":"resource"
+                  , "data":
+                  [15, 14.6667, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":90
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [1, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [585, 175, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:88"
+                  , "type":"resource"
+                  , "data":
+                  [41.6667, 0.666667, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":88
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"8-bit Integer Add"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [6, 0, 0, 0]
+                    }
+                    , {
+                      "name":"And"
+                      , "type":"resource"
+                      , "count":6
+                      , "data":
+                      [1.33333, 0.666667, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":6
+                      , "data":
+                      [1.33333, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:90"
+                  , "type":"resource"
+                  , "data":
+                  [4.33333, 0.333333, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":90
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"8-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [3, 0, 0, 0]
+                    }
+                    , {
+                      "name":"And"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [0.666667, 0.333333, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [0.666667, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:91"
+                  , "type":"resource"
+                  , "data":
+                  [1667, 8676, 64, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":91
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [99, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [104, 164, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free read from memory declared on Ising-kernel.cl:16."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Store"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [1464, 8512, 64, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Store uses a Burst-coalesced LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B11"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [3, 8, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [3, 8, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B2"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [292, 576, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [292, 576, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [74, 223, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:23"
+                  , "type":"resource"
+                  , "data":
+                  [34, 109, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":23
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:25"
+                  , "type":"resource"
+                  , "data":
+                  [34.3333, 109.667, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":25
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:26"
+                  , "type":"resource"
+                  , "data":
+                  [4.66667, 4.33333, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":26
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [1, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [404, 124, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:25"
+                  , "type":"resource"
+                  , "data":
+                  [46, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":25
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"2-bit Integer Add"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [2, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:26"
+                  , "type":"resource"
+                  , "data":
+                  [723, 1440, 26, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":26
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"2-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [66, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [588, 1392, 26, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Semi-streaming LSU.  Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Store"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [68, 48, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Store uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free write to memory declared on Ising-kernel.cl:16."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B4"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [0, 128, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:31"
+                  , "type":"resource"
+                  , "data":
+                  [0, 128, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":31
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:31"
+                  , "type":"resource"
+                  , "data":
+                  [410, 1270, 9, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":31
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [410, 1270, 9, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Burst-coalesced LSU"
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B5"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [85, 166, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [85, 166, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [71, 152, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:34"
+                  , "type":"resource"
+                  , "data":
+                  [55, 135, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":34
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:35"
+                  , "type":"resource"
+                  , "data":
+                  [15, 17, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":35
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [1, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [264, 92, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:34"
+                  , "type":"resource"
+                  , "data":
+                  [45.6667, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":34
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"15-bit Integer Add"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [10.6667, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"And"
+                      , "type":"resource"
+                      , "count":6
+                      , "data":
+                      [0.666667, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":6
+                      , "data":
+                      [1.33333, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:35"
+                  , "type":"resource"
+                  , "data":
+                  [358.333, 355, 13, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":35
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"15-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [5.33333, 0, 0, 0]
+                    }
+                    , {
+                      "name":"And"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [0.333333, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [0.666667, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [318, 331, 13, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Prefetching LSU"
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Store"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [34, 24, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Store uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free write to memory declared on Ising-kernel.cl:18."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B6"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [2, 35, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:77"
+                  , "type":"resource"
+                  , "data":
+                  [0, 32, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":77
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [2, 3, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [24, 28, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:77"
+                  , "type":"resource"
+                  , "data":
+                  [183, 119, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":77
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Floating-point Multiply"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [183, 119, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B7"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [112, 124, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [112, 124, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [93, 358, 3, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:15"
+                  , "type":"resource"
+                  , "data":
+                  [14.5833, 48.8333, 0.583333, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":15
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:43"
+                  , "type":"resource"
+                  , "data":
+                  [15, 27, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":43
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:49"
+                  , "type":"resource"
+                  , "data":
+                  [14.5833, 48.8333, 0.583333, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":49
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:54"
+                  , "type":"resource"
+                  , "data":
+                  [14.5833, 104.833, 1.58333, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":54
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:59"
+                  , "type":"resource"
+                  , "data":
+                  [9.25, 27.5, 0.25, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":59
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:76"
+                  , "type":"resource"
+                  , "data":
+                  [24, 101, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":76
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [1, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [245, 87, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:15"
+                  , "type":"resource"
+                  , "data":
+                  [6.66667, 0.333333, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":15
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"8-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2.25, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [3.66667, 0.333333, 0, 0]
+                    }
+                    , {
+                      "name":"Xor"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [0.75, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:43"
+                  , "type":"resource"
+                  , "data":
+                  [17, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":43
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"16-bit Integer Add"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [17, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:49"
+                  , "type":"resource"
+                  , "data":
+                  [6.66667, 0.333333, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":49
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"8-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2.25, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [3.66667, 0.333333, 0, 0]
+                    }
+                    , {
+                      "name":"Xor"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [0.75, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:54"
+                  , "type":"resource"
+                  , "data":
+                  [32.6667, 41.3333, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":54
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"8-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2.25, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [3.66667, 0.333333, 0, 0]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 41, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free read from memory declared on Ising-kernel.cl:18."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Xor"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [0.75, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:59"
+                  , "type":"resource"
+                  , "data":
+                  [3, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":59
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"8-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2.25, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Xor"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [0.75, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:76"
+                  , "type":"resource"
+                  , "data":
+                  [55, 1, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":76
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 1, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"sqa.B8"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [1587, 2557, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [1587, 2557, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [172, 538, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"Ising-kernel.cl:15"
+                  , "type":"resource"
+                  , "data":
+                  [12.3333, 51.6667, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":15
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:40"
+                  , "type":"resource"
+                  , "data":
+                  [10.6667, 48, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":40
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:43"
+                  , "type":"resource"
+                  , "data":
+                  [50, 119, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":43
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:49"
+                  , "type":"resource"
+                  , "data":
+                  [12.3333, 51.6667, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":49
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:54"
+                  , "type":"resource"
+                  , "data":
+                  [20.3333, 87.6667, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":54
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:59"
+                  , "type":"resource"
+                  , "data":
+                  [4, 18, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":59
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:62"
+                  , "type":"resource"
+                  , "data":
+                  [22, 50, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":62
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:67"
+                  , "type":"resource"
+                  , "data":
+                  [10.6667, 48, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":67
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:69"
+                  , "type":"resource"
+                  , "data":
+                  [10.6667, 48, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":69
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:76"
+                  , "type":"resource"
+                  , "data":
+                  [9, 8, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":76
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [10, 8, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [7, 50, 1, 0]
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [193, 35, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":""
+                        , "line":0
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"And"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [2, 2, 0, 0]
+                    }
+                    , {
+                      "name":"Case Statement"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 32, 0, 0]
+                    }
+                    , {
+                      "name":"Or"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [1, 1, 0, 0]
+                    }
+                    , {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":6
+                      , "data":
+                      [126, 0, 0, 0]
+                    }
+                  ]
+                }
+                , {
+                  "name":"Ising-kernel.cl:40"
+                  , "type":"resource"
+                  , "data":
+                  [161.333, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":40
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":19
+                      , "data":
+                      [161.333, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:53"
+                  , "type":"resource"
+                  , "data":
+                  [11, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":53
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:62"
+                  , "type":"resource"
+                  , "data":
+                  [116, 2, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":62
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"3-bit Integer Add"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [4, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [66, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":6
+                      , "data":
+                      [46, 2, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:63"
+                  , "type":"resource"
+                  , "data":
+                  [103, 2, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":63
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [70, 2, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:64"
+                  , "type":"resource"
+                  , "data":
+                  [33, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":64
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:66"
+                  , "type":"resource"
+                  , "data":
+                  [11, 1, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":66
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 1, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:67"
+                  , "type":"resource"
+                  , "data":
+                  [223.333, 16, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":67
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":21
+                      , "data":
+                      [190.333, 16, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:69"
+                  , "type":"resource"
+                  , "data":
+                  [315.333, 57, 0, 2]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":69
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Multiply"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [66, 0, 0, 2]
+                    }
+                    , {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 41, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free read from memory declared on Ising-kernel.cl:16."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":21
+                      , "data":
+                      [190.333, 16, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:70"
+                  , "type":"resource"
+                  , "data":
+                  [44, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":70
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:71"
+                  , "type":"resource"
+                  , "data":
+                  [11, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":71
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:72"
+                  , "type":"resource"
+                  , "data":
+                  [58, 41, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":72
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 41, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free read from memory declared on Ising-kernel.cl:16."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [32, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:73"
+                  , "type":"resource"
+                  , "data":
+                  [58, 41, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":73
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 41, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free read from memory declared on Ising-kernel.cl:16."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [32, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:74"
+                  , "type":"resource"
+                  , "data":
+                  [26, 41, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":74
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Load"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [26, 41, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free read from memory declared on Ising-kernel.cl:16."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:75"
+                  , "type":"resource"
+                  , "data":
+                  [452, 354, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":75
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Integer to Floating-point Conversion"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [452, 354, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:76"
+                  , "type":"resource"
+                  , "data":
+                  [1, 1, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":76
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"And"
+                      , "type":"resource"
+                      , "count":5
+                      , "data":
+                      [1, 1, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:77"
+                  , "type":"resource"
+                  , "data":
+                  [1754, 1311, 0, 1]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":77
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Floating-point Multiply"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [274, 240, 0, 1]
+                    }
+                    , {
+                      "name":"Floating-point Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [995, 717, 0, 0]
+                    }
+                    , {
+                      "name":"Integer to Floating-point Conversion"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [452, 354, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:78"
+                  , "type":"resource"
+                  , "data":
+                  [726, 594, 0, 1]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":78
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Floating-point Multiply"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [274, 240, 0, 1]
+                    }
+                    , {
+                      "name":"Integer to Floating-point Conversion"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [452, 354, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:79"
+                  , "type":"resource"
+                  , "data":
+                  [105, 8, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":79
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Floating-point Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [105, 8, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"Ising-kernel.cl:80"
+                  , "type":"resource"
+                  , "data":
+                  [67, 24, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/sam/Desktop/Annealing/SQA_fully/OpenCL_FPGA/Ising-kernel.cl"
+                        , "line":80
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [33, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Store"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [34, 24, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Store uses a Local-pipelined never-stall LSU"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Stall-free write to memory declared on Ising-kernel.cl:16."
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Load-Store Units"
+                              , "link":"https://www.altera.com/documentation/mwh1391807516407.html#yeo1491314105959"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

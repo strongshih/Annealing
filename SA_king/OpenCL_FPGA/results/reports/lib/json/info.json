@@ -1,0 +1,8 @@
+{"name":"Info","rows":[
+{"name":"Project Name","data":["king_kernel"],"classes":["info-table"]},
+{"name":"Target Family, Device, Board","data":["Cyclone V, 5CGTFD9D5F27C7, osk:c5gt"]},
+{"name":"AOC Version","data":["18.1.0 Build 625"]},
+{"name":"Quartus Version","data":["18.1.0 Build 625"]},
+{"name":"Command","data":["aoc king-kernel.cl -o king-kernel.aocx -board=c5gt -report -v -profile"]},
+{"name":"Reports Generated At", "data":["Mon Mar 23 01:26:02 2020"]}
+]}

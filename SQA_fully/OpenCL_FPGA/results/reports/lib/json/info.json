@@ -1,0 +1,8 @@
+{"name":"Info","rows":[
+{"name":"Project Name","data":["Ising_kernel"],"classes":["info-table"]},
+{"name":"Target Family, Device, Board","data":["Cyclone V, 5CGTFD9D5F27C7, osk:c5gt"]},
+{"name":"AOC Version","data":["18.1.0 Build 625"]},
+{"name":"Quartus Version","data":["18.1.0 Build 625"]},
+{"name":"Command","data":["aoc Ising-kernel.cl -o Ising-kernel.aocx -board=c5gt -report -v -profile"]},
+{"name":"Reports Generated At", "data":["Sun Mar 22 21:14:50 2020"]}
+]}
