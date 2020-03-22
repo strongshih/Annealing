@@ -63,7 +63,10 @@ __kernel void sqa(__global int *restrict couplings,
 			if (count >= (m<<bitshift) && count < ((N+m)<<bitshift)) { 
 				int klocal = (int)(((count - (m<<bitshift)) >> bitshift)); 
 				int j = ( count & bitmask );
-				lfield[m] += localJ[m][0]*lspin[m][j]; 
+				if (j == klocal)
+					lfield[m] += localJ[m][0];
+				else
+					lfield[m] += localJ[m][0]*lspin[m][j]; 
 				unsigned int up = (m!=0) ? m-1 : M-1;
 				unsigned int down = (m!=M-1) ? m+1 : 0;
 				int u = lspin[up][klocal];

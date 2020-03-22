@@ -70,7 +70,8 @@ __kernel void ising(__global const int* restrict couplings,
 		int E = 0;
 		for (int i = 0; i < N; i++) {
 			int d = spins[i];
-			for (int j = i; j < N; j++) {
+			E += couplings[i*N+i];
+			for (int j = i+1; j < N; j++) {
 				int c = couplings[i*N+j];
 				E += d*c*spins[j];
 			}

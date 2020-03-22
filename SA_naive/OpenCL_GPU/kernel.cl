@@ -32,8 +32,13 @@ __kernel void ising(__global int* couplings, __global int* results)
 		float r = xorshift32(&randnum) / (float) MAX;
 		for (int n = 0; n < N; n++) {
 			int difference = 0;
-			for (int j = 0; j < N; j++)
+			for (int j = 0; j < N; j++) {
+				if (j == n) {
+					difference += couplings[n*N+n];
+					continue;
+				}
 				difference += couplings[n*N+j]*spins[j];
+			}
 			difference = -1 * difference * spins[n];
 			if ((difference * beta) > log(r)) {
 				spins[n] = -spins[n];
@@ -43,8 +48,10 @@ __kernel void ising(__global int* couplings, __global int* results)
 
 	// calculate result
 	int E = 0;
-	for (int i = 0; i < N; i++)
-		for (int j = i; j < N; j++)
+	for (int i = 0; i < N; i++) {
+		E += spins[i]*couplings[i*N+j];
+		for (int j = i+1; j < N; j++)
 			E += spins[i]*spins[j]*couplings[i*N+j];
+	}
 	results[idx] = -E;
 }

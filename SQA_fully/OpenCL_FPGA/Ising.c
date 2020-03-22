@@ -212,9 +212,11 @@ int main (int argc, char *argv[]) {
 		// Get Result from device
 		status = clEnqueueReadBuffer(commandQueue, buffer_spin_out, CL_TRUE, 0, M* N * sizeof(cl_int),
 				spin_out, 0, NULL, NULL);
-		for (int i = 0; i < N; i++) 
-			for (int j = i; j < N; j++) 
+		for (int i = 0; i < N; i++) {
+			results[x] += -spin_out[i] * couplings[i*N+i];
+			for (int j = i+1; j < N; j++) 
 				results[x] += -spin_out[i] * spin_out[j] * couplings[i*N+j];
+		}
 		assert(status == CL_SUCCESS);
 	}
 	gettimeofday(&timeEnd, NULL);
