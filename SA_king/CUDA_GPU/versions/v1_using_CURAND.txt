@@ -1,0 +1,30 @@
+==2984458== NVPROF is profiling process 2984458, command: ./king-cuda 16384.txt
+Finish copying coefficients
+==2984458== Profiling application: ./king-cuda 16384.txt
+==2984458== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   59.84%  130.80ms     40011  3.2690us  2.4000us  13.632us  void gen_sequenced_Philox<curandStatePhilox4_32_10, float4, int, __operator_&__(float4 curand_uniform_noargs_philox<curandStatePhilox4_32_10>(curandStatePhilox4_32_10*, int)), rng_config<curandStatePhilox4_32_10>>(curandStatePhilox4_32_10*, float4*, unsigned long, unsigned long, int)
+                   40.10%  87.647ms     40000  2.1910us  2.1110us  12.320us  ising(int*, int const *, int, float, float const *)
+                    0.03%  61.023us        10  6.1020us  5.9840us  6.6240us  [CUDA memcpy DtoH]
+                    0.02%  51.488us         1  51.488us  51.488us  51.488us  [CUDA memcpy HtoD]
+                    0.01%  14.944us         1  14.944us  14.944us  14.944us  generate_seed_pseudo(__int64, __int64, curandStatePhilox4_32_10*)
+                    0.01%  13.152us        10  1.3150us  1.2480us  1.6000us  prepare_spins(int*, float const *)
+      API calls:   40.70%  392.47ms     80022  4.9040us  4.3870us  470.67us  cudaLaunchKernel
+                   31.84%  306.97ms         4  76.743ms  6.0590us  306.78ms  cudaMalloc
+                   20.92%  201.67ms     40010  5.0400us  1.5200us  466.77us  cudaDeviceSynchronize
+                    1.77%  17.072ms     80024     213ns     127ns  468.83us  cudaGetLastError
+                    1.50%  14.494ms         4  3.6236ms     805ns  14.456ms  cudaFree
+                    1.41%  13.586ms         6  2.2644ms  167.88us  11.614ms  cuDeviceTotalMem
+                    1.39%  13.381ms       573  23.351us     142ns  4.2565ms  cuDeviceGetAttribute
+                    0.27%  2.6062ms         1  2.6062ms  2.6062ms  2.6062ms  cudaGetDeviceProperties
+                    0.15%  1.4641ms         6  244.01us  34.400us  776.67us  cuDeviceGetName
+                    0.05%  453.43us        11  41.221us  31.337us  87.065us  cudaMemcpy
+                    0.00%  15.494us         1  15.494us  15.494us  15.494us  cudaThreadSynchronize
+                    0.00%  8.5090us         3  2.8360us  1.7940us  4.7640us  cuDeviceGetPCIBusId
+                    0.00%  4.2240us         9     469ns     278ns     824ns  cuDeviceGet
+                    0.00%  2.8790us         6     479ns     200ns     982ns  cuDeviceGetUuid
+                    0.00%  2.6120us         4     653ns     383ns  1.4560us  cuDeviceGetCount
+                    0.00%  2.2710us        10     227ns     162ns     347ns  cudaPeekAtLastError
+                    0.00%  1.8850us         1  1.8850us  1.8850us  1.8850us  cuInit
+                    0.00%  1.0440us         1  1.0440us  1.0440us  1.0440us  cudaGetDevice
+                    0.00%     613ns         1     613ns     613ns     613ns  cuDriverGetVersion

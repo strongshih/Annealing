@@ -1,0 +1,22 @@
+==3270199== NVPROF is profiling process 3270199, command: ./king-cuda 16384.txt
+Finish copying coefficients
+Finish intialize random number
+==3270199== Profiling application: ./king-cuda 16384.txt
+==3270199== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   99.93%  202.10ms        10  20.210ms  17.495ms  22.249ms  ising(int*, int const *, unsigned int*)
+                    0.03%  64.160us        10  6.4160us  6.3680us  6.4960us  [CUDA memcpy DtoH]
+                    0.03%  57.631us         2  28.815us  5.7600us  51.871us  [CUDA memcpy HtoD]
+                    0.01%  15.296us        10  1.5290us  1.3760us  1.6000us  prepare_spins(int*, unsigned int*)
+      API calls:   59.07%  300.07ms         3  100.02ms  6.0490us  300.05ms  cudaMalloc
+                   39.96%  203.01ms        12  16.917ms  21.334us  22.332ms  cudaMemcpy
+                    0.58%  2.9712ms       291  10.210us     299ns  1.3392ms  cuDeviceGetAttribute
+                    0.24%  1.2415ms         3  413.84us  291.59us  487.85us  cuDeviceTotalMem
+                    0.06%  279.91us        10  27.990us  17.158us  33.789us  cudaLaunchKernel
+                    0.04%  226.05us         3  75.349us  54.077us  116.49us  cuDeviceGetName
+                    0.03%  159.39us        10  15.939us  12.265us  17.491us  cudaLaunchCooperativeKernel
+                    0.01%  42.454us         2  21.227us  15.838us  26.616us  cudaFree
+                    0.00%  7.2750us         3  2.4250us  1.2820us  4.2930us  cuDeviceGetPCIBusId
+                    0.00%  2.7620us         6     460ns     312ns     919ns  cuDeviceGet
+                    0.00%  1.8590us         3     619ns     288ns  1.2010us  cuDeviceGetCount
+                    0.00%  1.5420us         3     514ns     407ns     658ns  cuDeviceGetUuid
