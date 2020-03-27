@@ -8,6 +8,15 @@ python fully.py --> generate fully-connected problems, e.g: 0.txt
 
 ## TEST
 
+- include nvcc library path
+
+```
+export PATH=/opt/cuda/bin${PATH:+:${PATH}}$
+export LD_LIBRARY_PATH=/opt/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+```
+
+- test
+
 ```
 git clone https://github.com/strongshih/Annealing.git
 cd Annealing/SB/CUDA_GPU/
