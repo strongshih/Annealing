@@ -15,6 +15,9 @@
 	│   └── OpenCL_GPU
 	├── SQA_fully
 	│   └── OpenCL_FPGA
-	└── SQA_king
-		└── OpenCL_FPGA
+	├── SQA_king
+	│   ├── CUDA_GPU
+	│   └── OpenCL_FPGA
+	└── SB
+	    └── CUDA_GPU
 	```

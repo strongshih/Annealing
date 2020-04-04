@@ -7,25 +7,24 @@
 #define N 4096
 #define EDGE 64
 #define THREADS 16
-#define TIMES 10
-#define SWEEP 100
+#define TIMES 1
+#define SWEEP 200
 #define MAX 4294967295.0
 
-// parameter settings
+// parameter settings (p > detune - xi, bifurcation point)
 #define K 1
 #define detune 0.5
 #define xi 0.1
-#define epsilon 0.01
 #define deltaT 0.1
 
 #define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
 inline void gpuAssert (cudaError_t code, const char *file, int line, bool abort=true)
 {
-	if (code != cudaSuccess)
-	{
-		fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
-		if (abort) exit(code);
-	}
+   if (code != cudaSuccess)
+   {
+      fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
+      if (abort) exit(code);
+   }
 }
 
 typedef struct point {
@@ -45,35 +44,51 @@ __device__ uint xorshift32 (uint *state)
 }
 
 __global__ void prepare_points (Point *p,
-			        uint *randvals) 
+                        	    uint *randvals) 
 {
-	int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
-	p[idx].x = ((xorshift32(&randvals[idx]) / (float) MAX) / 10.0);
-	p[idx].y = ((xorshift32(&randvals[idx]) / (float) MAX) / 10.0);
+    p[idx].x = ((xorshift32(&randvals[idx]) / (float) MAX) / 10.0);
+    p[idx].y = ((xorshift32(&randvals[idx]) / (float) MAX) / 10.0);
 }
 
-__global__ void Bifurcation (Point *p,
-			     int* couplings, 
-			     float amplitude)
+__global__ void UpdateX (Point *p,
+					     int* couplings, 
+					     float amplitude)
 {
 	int idx = blockIdx.x * blockDim.x + threadIdx.x;
-	float oldX = p[idx].x;
-	float oldY = p[idx].y;
+    float oldX = p[idx].x;
+    float oldY = p[idx].y;
 
-	// update x coordinate
-	float newX = detune*oldY*deltaT + oldX;
-	p[idx].x = newX;
+    // update x coordinate
+    float newX = detune*oldY*deltaT + oldX;
+    p[idx].x = newX;
 
-	// update y coordinate
-	float newY = -K * (oldX * oldX * oldX)*deltaT + amplitude*oldX - detune*oldX;
-	float s = 0.0;
-	for (int i = 0; i < N; i++)
-		s += couplings[idx*N+i]*p[idx].x;
-	s *= (xi*deltaT);
-	newY += s;
-	newY += oldY;
-	p[idx].y = newY;
+	if (idx == 1)
+		printf("position: %f\n", newX);
+}
+
+__global__ void UpdateY (Point *p,
+					     int* couplings, 
+					     float amplitude)
+{
+	int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    float newX = p[idx].x;
+    float oldY = p[idx].y;
+
+    // update y coordinate
+    float newY = -K * (newX * newX * newX)*deltaT + 
+		              amplitude*newX*deltaT - detune*newX*deltaT;
+    float s = 0.0;
+    for (int i = 0; i < N; i++)
+    	s += couplings[idx*N+i]*p[i].x;
+    s = s*xi*deltaT;
+    newY += s;
+    newY += oldY;
+    p[idx].y = newY;
+
+	// if (idx == 1)
+	//	printf("speed: %f\n", newY);
 }
 
 void usage () 
@@ -90,7 +105,7 @@ int main (int argc, char *argv[])
 
 	// initialize couplings
 	int *couplings, *couplings_buf;
-	couplings = (int*)malloc(N*N*sizeof(int));
+    couplings = (int*)malloc(N*N*sizeof(int));
 	memset(couplings, '\0', N*N*sizeof(int));
 	gpuErrchk( cudaMalloc(&couplings_buf, N*N*sizeof(int)) );
 
@@ -113,14 +128,14 @@ int main (int argc, char *argv[])
 	// initialize random number
 	uint *randvals, *initRand;
 	gpuErrchk( cudaMalloc(&randvals, N * sizeof(uint)) );
-	initRand = (uint*)malloc(N*sizeof(uint));
+    initRand = (uint*)malloc(N*sizeof(uint));
 	for (int i = 0; i < N; i++)
 		initRand[i] = i;
 	gpuErrchk( cudaMemcpy(randvals, initRand, N*sizeof(uint), cudaMemcpyHostToDevice) );
 
 	// initialize points
 	Point *points, *points_buf;
-	points = (Point*)malloc(N*sizeof(Point));
+    points = (Point*)malloc(N*sizeof(Point));
 	gpuErrchk( cudaMalloc(&points_buf, N*sizeof(Point)) );
 
 	// launching kernel
@@ -129,9 +144,11 @@ int main (int argc, char *argv[])
 	for (int x = 0; x < TIMES; x++) {
 		prepare_points<<<grid, block>>>(points_buf, randvals);
 		for (int s = 0; s < SWEEP; s++) {
-			float amplitude = epsilon*s*deltaT;
-			Bifurcation<<<grid, block>>>(points_buf, couplings_buf, 
-							amplitude);
+			float amplitude = s*deltaT;
+			UpdateX<<<grid, block>>>(points_buf, couplings_buf, 
+										 amplitude);
+			UpdateY<<<grid, block>>>(points_buf, couplings_buf, 
+										 amplitude);
 		}
 		// Get Result from device
 		gpuErrchk( cudaMemcpy(points, points_buf, N*sizeof(Point), cudaMemcpyDeviceToHost) );
@@ -152,7 +169,7 @@ int main (int argc, char *argv[])
 	FILE *output;
 	output = fopen("output.txt", "w");
 	for (int i = 0; i < TIMES; i++)
-		fprintf(output, "%d\n", results[i]);
+ 		fprintf(output, "%d\n", results[i]);
 	fclose(output);
 
 	// Release Objects

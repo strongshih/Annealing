@@ -39,3 +39,11 @@ cd Annealing/SB/CUDA_GPU/
 - At least energy results will be consistent with the results given by https://arxiv.org/abs/1401.1084
 - Use `nvvp` or `nvprof` to further analyze the code, and optimize it
 - Hopefully, the codes can achieve same experiment results as Toshiba SB's
+
+## Update
+
+- correctness 
+- `stats.txt` shows the annealing time, which needs to be optimized
+- plot speed and position
+
+![](./plot_figure/plot.png)
