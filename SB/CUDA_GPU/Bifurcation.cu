@@ -28,23 +28,23 @@ inline void gpuAssert (cudaError_t code, const char *file, int line, bool abort=
 }
 
 typedef struct point {
-	float x;
-	float y;
+    float x;
+    float y;
 } Point;
 
 
 __device__ uint xorshift32 (uint *state)
 {
-	uint x = *state;
-	x ^= x << 13;
-	x ^= x >> 17;
-	x ^= x << 5;
-	*state = x;
-	return x;
+    uint x = *state;
+    x ^= x << 13;
+    x ^= x >> 17;
+    x ^= x << 5;
+    *state = x;
+    return x;
 }
 
 __global__ void prepare_points (Point *p,
-                        	    uint *randvals) 
+                                uint *randvals) 
 {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
@@ -53,10 +53,10 @@ __global__ void prepare_points (Point *p,
 }
 
 __global__ void UpdateX (Point *p,
-					     int* couplings, 
-					     float amplitude)
+                         int* couplings, 
+                         float amplitude)
 {
-	int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
     float oldX = p[idx].x;
     float oldY = p[idx].y;
 
@@ -64,120 +64,120 @@ __global__ void UpdateX (Point *p,
     float newX = detune*oldY*deltaT + oldX;
     p[idx].x = newX;
 
-	if (idx == 1)
-		printf("position: %f\n", newX);
+    if (idx == 1)
+        printf("position: %f\n", newX);
 }
 
 __global__ void UpdateY (Point *p,
-					     int* couplings, 
-					     float amplitude)
+                         int* couplings, 
+                         float amplitude)
 {
-	int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
     float newX = p[idx].x;
     float oldY = p[idx].y;
 
     // update y coordinate
     float newY = -K * (newX * newX * newX)*deltaT + 
-		              amplitude*newX*deltaT - detune*newX*deltaT;
+                      amplitude*newX*deltaT - detune*newX*deltaT;
     float s = 0.0;
     for (int i = 0; i < N; i++)
-    	s += couplings[idx*N+i]*p[i].x;
+        s += couplings[idx*N+i]*p[i].x;
     s = s*xi*deltaT;
     newY += s;
     newY += oldY;
     p[idx].y = newY;
 
-	// if (idx == 1)
-	//	printf("speed: %f\n", newY);
+    // if (idx == 1)
+    //    printf("speed: %f\n", newY);
 }
 
 void usage () 
 {
-	printf("Usage:\n");
-	printf("       ./Bifurcation-cuda [spin configuration]\n");
-	exit(0);
+    printf("Usage:\n");
+    printf("       ./Bifurcation-cuda [spin configuration]\n");
+    exit(0);
 }
 
 int main (int argc, char *argv[]) 
 {
-	if (argc != 2) 
-		usage();
+    if (argc != 2) 
+        usage();
 
-	// initialize couplings
-	int *couplings, *couplings_buf;
+    // initialize couplings
+    int *couplings, *couplings_buf;
     couplings = (int*)malloc(N*N*sizeof(int));
-	memset(couplings, '\0', N*N*sizeof(int));
-	gpuErrchk( cudaMalloc(&couplings_buf, N*N*sizeof(int)) );
+    memset(couplings, '\0', N*N*sizeof(int));
+    gpuErrchk( cudaMalloc(&couplings_buf, N*N*sizeof(int)) );
 
-	// Read couplings file 
-	FILE *instance = fopen(argv[1], "r");
-	assert(instance != NULL);
-	int a, b, w;
-	fscanf(instance, "%d", &a);
-	while (!feof(instance)) {
-		fscanf(instance, "%d%d%d", &a, &b, &w);
-		assert(a != b); // not dealing with external field
-		couplings[a * N + b] = w;
-		couplings[b * N + a] = w;
-	}
-	fclose(instance);
+    // Read couplings file 
+    FILE *instance = fopen(argv[1], "r");
+    assert(instance != NULL);
+    int a, b, w;
+    fscanf(instance, "%d", &a);
+    while (!feof(instance)) {
+        fscanf(instance, "%d%d%d", &a, &b, &w);
+        assert(a != b); // not dealing with external field
+        couplings[a * N + b] = w;
+        couplings[b * N + a] = w;
+    }
+    fclose(instance);
 
-	// copy couplings to target device
-	gpuErrchk( cudaMemcpy(couplings_buf, couplings, N*N*sizeof(int), cudaMemcpyHostToDevice) );
+    // copy couplings to target device
+    gpuErrchk( cudaMemcpy(couplings_buf, couplings, N*N*sizeof(int), cudaMemcpyHostToDevice) );
 
-	// initialize random number
-	uint *randvals, *initRand;
-	gpuErrchk( cudaMalloc(&randvals, N * sizeof(uint)) );
+    // initialize random number
+    uint *randvals, *initRand;
+    gpuErrchk( cudaMalloc(&randvals, N * sizeof(uint)) );
     initRand = (uint*)malloc(N*sizeof(uint));
-	for (int i = 0; i < N; i++)
-		initRand[i] = i;
-	gpuErrchk( cudaMemcpy(randvals, initRand, N*sizeof(uint), cudaMemcpyHostToDevice) );
+    for (int i = 0; i < N; i++)
+        initRand[i] = i;
+    gpuErrchk( cudaMemcpy(randvals, initRand, N*sizeof(uint), cudaMemcpyHostToDevice) );
 
-	// initialize points
-	Point *points, *points_buf;
+    // initialize points
+    Point *points, *points_buf;
     points = (Point*)malloc(N*sizeof(Point));
-	gpuErrchk( cudaMalloc(&points_buf, N*sizeof(Point)) );
+    gpuErrchk( cudaMalloc(&points_buf, N*sizeof(Point)) );
 
-	// launching kernel
-	dim3 grid(N), block(1);
-	int results[TIMES] = {0};
-	for (int x = 0; x < TIMES; x++) {
-		prepare_points<<<grid, block>>>(points_buf, randvals);
-		for (int s = 0; s < SWEEP; s++) {
-			float amplitude = s*deltaT;
-			UpdateX<<<grid, block>>>(points_buf, couplings_buf, 
-										 amplitude);
-			UpdateY<<<grid, block>>>(points_buf, couplings_buf, 
-										 amplitude);
-		}
-		// Get Result from device
-		gpuErrchk( cudaMemcpy(points, points_buf, N*sizeof(Point), cudaMemcpyDeviceToHost) );
+    // launching kernel
+    dim3 grid(N), block(1);
+    int results[TIMES] = {0};
+    for (int x = 0; x < TIMES; x++) {
+        prepare_points<<<grid, block>>>(points_buf, randvals);
+        for (int s = 0; s < SWEEP; s++) {
+            float amplitude = s*deltaT;
+            UpdateX<<<grid, block>>>(points_buf, couplings_buf, 
+                                         amplitude);
+            UpdateY<<<grid, block>>>(points_buf, couplings_buf, 
+                                         amplitude);
+        }
+        // Get Result from device
+        gpuErrchk( cudaMemcpy(points, points_buf, N*sizeof(Point), cudaMemcpyDeviceToHost) );
 
-		// calculate energy
-		int E = 0;
-		for (int i = 0; i < N; i++) {
-			for (int j = i+1; j < N; j++) {
-				int a = points[i].x > 0.0 ? 1 : -1;
-				int b = points[j].x > 0.0 ? 1 : -1;
-				E += a*b*couplings[i*N+j];
-			}
-		}
-		results[x] = -E;
-	}
+        // calculate energy
+        int E = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = i+1; j < N; j++) {
+                int a = points[i].x > 0.0 ? 1 : -1;
+                int b = points[j].x > 0.0 ? 1 : -1;
+                E += a*b*couplings[i*N+j];
+            }
+        }
+        results[x] = -E;
+    }
 
-	// Write statistics to file
-	FILE *output;
-	output = fopen("output.txt", "w");
-	for (int i = 0; i < TIMES; i++)
- 		fprintf(output, "%d\n", results[i]);
-	fclose(output);
+    // Write statistics to file
+    FILE *output;
+    output = fopen("output.txt", "w");
+    for (int i = 0; i < TIMES; i++)
+         fprintf(output, "%d\n", results[i]);
+    fclose(output);
 
-	// Release Objects
-	free(couplings);
-	free(points);
-	free(initRand);
-	cudaFree(couplings_buf);
-	cudaFree(points_buf);
-	cudaFree(randvals);
-	return 0;
+    // Release Objects
+    free(couplings);
+    free(points);
+    free(initRand);
+    cudaFree(couplings_buf);
+    cudaFree(points_buf);
+    cudaFree(randvals);
+    return 0;
 }

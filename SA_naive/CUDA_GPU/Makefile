@@ -3,7 +3,7 @@ CC = nvcc
 all: Ising-cuda
 
 %-cuda: %.cu
-	$(CC) $< -o $@ -g 
+    $(CC) $< -o $@ -g 
 
 clean: 
-	rm -rf Ising-cuda
+    rm -rf Ising-cuda

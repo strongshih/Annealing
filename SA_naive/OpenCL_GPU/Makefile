@@ -3,7 +3,7 @@ CC = nvcc
 all: Ising-opencl
 
 %-opencl: %.c
-	$(CC) $< -o $@ -g -lOpenCL
+    $(CC) $< -o $@ -g -lOpenCL
 
 clean: 
-	rm -rf Ising-opencl
+    rm -rf Ising-opencl

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <assert.h>
 #include <cuda.h>
- 
+
 #define N 1048576
 #define EDGE 1024
 #define THREADS 32
@@ -118,7 +118,7 @@ __global__ void reduction (int *spins,
 
     if (tid == 0) {
         sum_result[blockId] = sdata[0];
-	}
+    }
 }
 
 __global__ void swap (int* spins, 
@@ -126,20 +126,20 @@ __global__ void swap (int* spins,
 {
     int blockId = blockIdx.x + blockIdx.y * gridDim.x;
     int idx = blockId * (blockDim.x * blockDim.y) + (threadIdx.y * blockDim.x) + threadIdx.x;
-	int tmp = spins[r*N+idx];
-	spins[r*N+idx] = spins[(r+1)*N+idx];
-	spins[(r+1)*N+idx] = tmp;
+    int tmp = spins[r*N+idx];
+    spins[r*N+idx] = spins[(r+1)*N+idx];
+    spins[(r+1)*N+idx] = tmp;
 }
 
 int reduced_sum (int *spins, int *couplings, int r, int *sum, int *sum_buf) {
     dim3 grid(EDGE/THREADS, EDGE/THREADS), block(THREADS, THREADS);
     reduction<<<grid, block>>>(spins, couplings, r, sum_buf);
-		CUDA_CALL( cudaPeekAtLastError() );
-	CUDA_CALL( cudaMemcpy(sum, sum_buf, (EDGE/THREADS)*(EDGE/THREADS)*sizeof(int), cudaMemcpyDeviceToHost) );
+        CUDA_CALL( cudaPeekAtLastError() );
+    CUDA_CALL( cudaMemcpy(sum, sum_buf, (EDGE/THREADS)*(EDGE/THREADS)*sizeof(int), cudaMemcpyDeviceToHost) );
     int ret = 0;
     for (int i = 0; i < (EDGE/THREADS)*(EDGE/THREADS); i++){
         ret += sum[i];
-	}
+    }
     return -(ret>>1);
 }
 
@@ -235,9 +235,9 @@ int main (int argc, char *argv[]) {
             for (int r = 0; r < REPLICA-1; r++) {
                 int e1 = reduced_sum(spins_buf, couplings_buf, r, sum_result, sum_result_buf);
                 int e2 = reduced_sum(spins_buf, couplings_buf, r+1, sum_result, sum_result_buf);
-				float u = log(rand()/(float)RAND_MAX);
+                float u = log(rand()/(float)RAND_MAX);
                 if (u < (e2-e1)*(betas[r+1]-betas[r])) {
-					swap<<<grid, block>>>(spins_buf, r);
+                    swap<<<grid, block>>>(spins_buf, r);
                 }
             }
         }
