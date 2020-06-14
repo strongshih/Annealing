@@ -9,11 +9,12 @@
 #define AOCL_ALIGNMENT 64
 #define MAXDEVICE 10
 #define MAXK 50000000
-#define N 128
-#define M 4
+#define N 256
+#define M 32
 #define SWEEP 500
-#define TIMES 1
+#define TIMES 5
 #define NANO2SECOND 1000000000.0
+#define PRINT 1
 
 void usage() {
     printf("Usage:\n");
@@ -92,18 +93,18 @@ int main (int argc, char *argv[]) {
     printf("Build kernel completes\n");
 
     // Prepare problems input
-    cl_int* couplings = (cl_int*)malloc(N * N * sizeof(cl_int));
-    posix_memalign((void*)&couplings, AOCL_ALIGNMENT, N*N*sizeof(cl_int));
+    cl_char* couplings = (cl_char*)malloc(N * N * sizeof(cl_char));
+    posix_memalign((void*)&couplings, AOCL_ALIGNMENT, N*N*sizeof(cl_char));
     assert(couplings != NULL);
-    memset(couplings, '\0', N*N*sizeof(int));
-    cl_int* spin_in = (cl_int*)malloc(M * N * sizeof(cl_int));
-    posix_memalign((void*)&spin_in, AOCL_ALIGNMENT, M*N*sizeof(cl_int));
+    memset(couplings, '\0', N*N*sizeof(char));
+    cl_char* spin_in = (cl_char*)malloc(M * N * sizeof(cl_char));
+    posix_memalign((void*)&spin_in, AOCL_ALIGNMENT, M*N*sizeof(cl_char));
     assert(spin_in != NULL);
-    cl_int* spin_out = (cl_int*)malloc(M * N * sizeof(cl_int));
-    posix_memalign((void*)&spin_out, AOCL_ALIGNMENT, M*N*sizeof(cl_int));
+    cl_char* spin_out = (cl_char*)malloc(M * N * sizeof(cl_char));
+    posix_memalign((void*)&spin_out, AOCL_ALIGNMENT, M*N*sizeof(cl_char));
     assert(spin_out != NULL);
-    cl_float* randomLogT = (cl_float*)malloc(M * sizeof(cl_float));
-    posix_memalign((void*)&randomLogT, AOCL_ALIGNMENT, M*sizeof(cl_int));
+    cl_float* randomLogT = (cl_float*)malloc(N * M * sizeof(cl_float));
+    posix_memalign((void*)&randomLogT, AOCL_ALIGNMENT, N*M*sizeof(cl_int));
     assert(randomLogT != NULL);
     cl_float* Jtrans = (cl_float*)malloc(sizeof(cl_float));
     posix_memalign((void*)&Jtrans, AOCL_ALIGNMENT, sizeof(cl_int));
@@ -124,7 +125,7 @@ int main (int argc, char *argv[]) {
 
     // Create Buffer (Pass data to device buffer)
     cl_mem buffer_couplings = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, 
-            N * N * sizeof(cl_int), couplings, &status);
+            N * N * sizeof(cl_char), couplings, &status);
     assert(status == CL_SUCCESS);
         
     // Parameter Linking: link allocated buffers to program's (kernel.cl) function's parametes
@@ -148,18 +149,19 @@ int main (int argc, char *argv[]) {
 
         // create buffer
         cl_mem buffer_spin_in = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, 
-                M * N * sizeof(cl_int), spin_in, &status);
+                M * N * sizeof(cl_char), spin_in, &status);
         assert(status == CL_SUCCESS);
         cl_mem buffer_spin_out = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, 
-                M * N * sizeof(cl_int), spin_out, &status);
+                M * N * sizeof(cl_char), spin_out, &status);
         assert(status == CL_SUCCESS);
 
         float beta = 1/(float)16;
         for (int t = 0; t < SWEEP; t++) {
             for (int i = 0; i < M; i++)
-                randomLogT[i] = -log(rand() / (float) RAND_MAX) / beta / 2.0 * M;
+				for (int j = 0; j < N; j++)
+                	randomLogT[i*N+j] = -log(rand() / (float) RAND_MAX) / beta / 2.0 * M;
             cl_mem buffer_randomLogT = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, 
-                    M * sizeof(cl_float), randomLogT, &status);
+                    N * M * sizeof(cl_float), randomLogT, &status);
             assert(status == CL_SUCCESS);
 
             float Gamma = G0*(1-(float)t/SWEEP);
@@ -186,6 +188,7 @@ int main (int argc, char *argv[]) {
                 assert(status == CL_SUCCESS);
             }
 
+#ifdef PRINT
             cl_event event;
             status = clEnqueueTask(commandQueue, kernel, 0, NULL, &event);
             assert(status == CL_SUCCESS);
@@ -204,11 +207,17 @@ int main (int argc, char *argv[]) {
             printf("Queued time %f (s)\n", (tSub-tQ)/1000000000.0);
             printf("Submission time %f (s)\n", (tS-tSub)/1000000000.0);
             printf("Execution time %f (s)\n", (tE-tS)/1000000000.0);
+#endif
+#ifndef PRINT
+            status = clEnqueueTask(commandQueue, kernel, 0, NULL, NULL);
+            assert(status == CL_SUCCESS);
+            clFinish(commandQueue);
+#endif
             beta += increase;
         }
 
         // Get Result from device
-        status = clEnqueueReadBuffer(commandQueue, buffer_spin_out, CL_TRUE, 0, M* N * sizeof(cl_int),
+        status = clEnqueueReadBuffer(commandQueue, buffer_spin_out, CL_TRUE, 0, M * N * sizeof(cl_char),
                 spin_out, 0, NULL, NULL);
         for (int i = 0; i < N; i++) {
             results[x] += -spin_out[i] * couplings[i*N+i];
