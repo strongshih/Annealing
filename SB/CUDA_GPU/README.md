@@ -18,6 +18,14 @@ make
 make test
 ```
 
+- file
+
+```
+m2_opt.cu  (float) --> original
+m2_opt2.cu (float) --> tensor core
+m2_opt3.cu (half)  --> tensor core
+```
+
 ## Update reference
 
 ![](./stats/update.png)
