@@ -1,0 +1,6 @@
+sqa2.cu: no copy back
+sqa_unroll_m.cu: parallelize trotter (M*N) threads
+sqa_unroll_m_2.cu: parallelize trotter (N) threads with M works
+pre_calculate.cu: reduced sum implementation
+
+

@@ -1,6 +1,7 @@
 CC = nvcc
 
-all: sqa-cuda sqa-omp
+all: sqa-cuda sqa-omp sqa2-cuda sqa_unroll_m-cuda sqa_unroll_m_2-cuda pre_calculate-cuda
+
 
 %-cuda: %.cu
 	$(CC) $< -o $@ -g 
