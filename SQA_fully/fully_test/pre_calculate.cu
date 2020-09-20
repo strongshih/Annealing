@@ -8,12 +8,12 @@
 #include "cuda_profiler_api.h"
 
 #define N 2048
-#define THREADS 1024
-#define TIMES 1
+#define THREADS 64
+#define TIMES 10
 
 #define MAX 4294967295.0
 #define STEP 100
-#define M 32
+#define M 16
 
 #define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
 inline void gpuAssert (cudaError_t code, const char *file, int line, bool abort=true)
@@ -105,8 +105,8 @@ __global__ void reduce(int iter, char *g_idata, int *g_odata, char *couplings) {
 	for (int m = 0; m < M; m++) {
 		int target_spin = iter - m;
 		if (target_spin >= 0 && target_spin < N) {
-			sdata[tid] = g_idata[i + m*N]*couplings[target_spin*N+i] + \
-                         g_idata[i+blockDim.x + m*N]*couplings[target_spin*N+i+blockDim.x];
+			sdata[tid] = g_idata[i*M + m]*couplings[target_spin*N+i] + \
+                         g_idata[(i+blockDim.x)*M + m]*couplings[target_spin*N+i+blockDim.x];
 			__syncthreads();
 			if (blockSize >= 1024) { if (tid < 512) { sdata[tid] += sdata[tid + 512]; } __syncthreads(); }
 			if (blockSize >= 512) { if (tid < 256) { sdata[tid] += sdata[tid + 256]; } __syncthreads(); }
