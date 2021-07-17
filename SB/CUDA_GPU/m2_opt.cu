@@ -14,8 +14,8 @@
 namespace cg = cooperative_groups;
 
 // N defined here
-#define N 32768
-#define THREADS 64
+#define N 2048
+#define THREADS 512
 #define TIMES 10
 #define MAX 4294967295.0
 
@@ -84,7 +84,6 @@ __global__ void UpdateTwice(float *x,
 
     x[idx] = lx;
     y[idx] = ly;
-    __syncthreads();
 }
 
 class Accelerator
@@ -125,9 +124,9 @@ void Accelerator::init_coeff(std::string fileName)
     gpuErrchk(cudaMalloc(&couplings_buf, N * N * sizeof(float)));
 
     gpuErrchk(cudaMallocHost((void **)&spin_pinned, (N * sizeof(int))));
-    gpuErrchk(cudaMalloc((void **)&spin_buf, (N * 16 * sizeof(int))));
-    gpuErrchk(cudaMalloc((void **)&E_buf, (N * sizeof(int))));
-    gpuErrchk(cudaMalloc((void **)&E, (sizeof(int))));
+    gpuErrchk(cudaMalloc(&spin_buf, (N * 16 * sizeof(int))));
+    gpuErrchk(cudaMalloc(&E_buf, (N * sizeof(int))));
+    gpuErrchk(cudaMallocHost((void **)&E, (N * sizeof(int))));
 
     read_file(fileName);
 
@@ -183,26 +182,26 @@ __global__ void calSpin(float *x_buf, int *spin_buf)
     spin_buf[idx] = x_buf[idx] > 0.0 ? 1 : -1;
 }
 
+__device__ void energyReduce(int *E_buf, int idx, int i){
+    if ((idx >> i) % 2 == 0) E_buf[idx] += E_buf[idx + (1 << i)];
+}
+
 __global__ void calEnergy(int *spin_buf, int *E_buf, float *couplings_buf)
 {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    int E = E_buf[idx] = 0;
+    int E = 0;
     for (int i = 0; i < N; i++)
     {
-        E += spin_buf[i] * spin_buf[idx] * couplings_buf[i * N + idx];
+        E += spin_buf[idx] * spin_buf[i] * couplings_buf[idx * N + i];
     }
     E_buf[idx] = E;
+    __syncthreads();
     for (int i = 0; i < 15; i++)
     {
-        if ((idx >> i) % 2 == 0)
-            E_buf[idx] += E_buf[idx + 1 << i];
-        __syncthreads();
+        energyReduce(E_buf, idx, i);
     }
 }
-__global__ void energy(int *E, int *E_buf)
-{
-    E[0] = E_buf[0];
-}
+
 
 // n step iter for a run
 void Accelerator::run(int times, int steps)
@@ -219,11 +218,10 @@ void Accelerator::run(int times, int steps)
 
         calSpin<<<grid, block>>>(x_buf, spin_buf);
         calEnergy<<<grid, block>>>(spin_buf, E_buf, couplings_buf);
-        energy<<<grid, block>>>(E, E_buf);
-        int res = E[0];
-        printf("%d\n", res);
-        gpuErrchk(cudaMemcpy(&res, E, sizeof(int), cudaMemcpyDeviceToHost));
+        
+        gpuErrchk(cudaMemcpy(E, E_buf, sizeof(int), cudaMemcpyDeviceToHost));
 
+        int res=E[0];
         printf("%d\n", res);
         results[t] = res;
     }
@@ -272,11 +270,14 @@ Accelerator::~Accelerator()
     cudaFreeHost(y_pinned);
     cudaFreeHost(randvals_pinned);
     cudaFreeHost(spin_pinned);
+    cudaFreeHost(E);
     cudaFree(couplings_buf);
     cudaFree(x_buf);
     cudaFree(y_buf);
     cudaFree(randvals_buf);
     cudaFree(spin_buf);
+    cudaFree(E_buf);
+    free(results);
 }
 
 void usage()
@@ -297,34 +298,32 @@ int main(int argc, char *argv[])
 
     result results[TIMES];
 
-    for (int t = 0; t < TIMES; t++)
-    {
-        double timer = 0.;
-        float gpu_timer = 0;
-        cudaEvent_t start, stop;
+    
+    double timer = 0.;
+    float gpu_timer = 0;
+    cudaEvent_t start, stop;
 
-        gpuErrchk(cudaEventCreate(&start));
-        gpuErrchk(cudaEventCreate(&stop));
+    gpuErrchk(cudaEventCreate(&start));
+    gpuErrchk(cudaEventCreate(&stop));
 
-        gpuErrchk(cudaEventRecord(start, 0));
-        clock_t begin = clock();
+    gpuErrchk(cudaEventRecord(start, 0));
+    clock_t begin = clock();
 
-        acc.run(TIMES, STEP);
+    acc.run(TIMES, STEP);
 
-        clock_t end = clock();
+    clock_t end = clock();
 
-        gpuErrchk(cudaEventRecord(stop, 0));
-        gpuErrchk(cudaEventSynchronize(stop));
+    gpuErrchk(cudaEventRecord(stop, 0));
+    gpuErrchk(cudaEventSynchronize(stop));
 
-        gpuErrchk(cudaEventElapsedTime(&gpu_timer, start, stop));
+    gpuErrchk(cudaEventElapsedTime(&gpu_timer, start, stop));
 
-        gpuErrchk(cudaEventDestroy(start));
-        gpuErrchk(cudaEventDestroy(stop));
+    gpuErrchk(cudaEventDestroy(start));
+    gpuErrchk(cudaEventDestroy(stop));
 
-        timer = (double)(end - begin) / CLOCKS_PER_SEC;
-        gpu_timer /= 1000;
-        printf("cpu elapse time:%6.6lf, gpu elapse time:%6.6lf\n", timer, gpu_timer);
-    }
+    timer = (double)(end - begin) / CLOCKS_PER_SEC;
+    gpu_timer /= 1000;
+    printf("cpu elapse time:%6.6lf, gpu elapse time:%6.6lf\n", timer, gpu_timer);
 
     acc.output(results);
     return 0;
