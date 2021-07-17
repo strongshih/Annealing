@@ -29,3 +29,9 @@ m2_opt3.cu (half)  --> tensor core
 ## Update reference
 
 ![](./stats/update.png)
+
+## cuBLAS
+
+```
+To use the cuBLAS API, the application must allocate the required matrices and vectors in the GPU memory space, fill them with data, call the sequence of desired cuBLAS functions, and then upload the results from the GPU memory space back to the host. The cuBLAS API also provides helper functions for writing and retrieving data from the GPU. 
+```

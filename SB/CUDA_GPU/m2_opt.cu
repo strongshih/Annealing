@@ -6,11 +6,15 @@
 #include <assert.h>
 #include <time.h>
 #include <cuda_runtime.h>
+#include <cooperative_groups.h>
+
 #include "cublas_v2.h"
 #include "cuda_profiler_api.h"
 
+namespace cg = cooperative_groups;
+
 // N defined here
-#define N 2048
+#define N 32768
 #define THREADS 64
 #define TIMES 10
 #define MAX 4294967295.0
@@ -60,6 +64,7 @@ __global__ void prepare_points(float *x,
 
     x[idx] = ((xorshift32(&randvals_buf[idx]) / (float)MAX) / 10.0);
     y[idx] = ((xorshift32(&randvals_buf[idx]) / (float)MAX) / 10.0);
+    __syncthreads();
 }
 
 __global__ void UpdateTwice(float *x,
@@ -73,25 +78,29 @@ __global__ void UpdateTwice(float *x,
 #pragma unroll
     for (int i = 0; i < M; i++)
     {
-        lx = lx + detune * ly * deltaT;
-        ly = ly - deltaT * (K * lx * lx * lx + (detune - amplitude) * lx);
+        lx = lx + deltaT * detune * ly;
+        ly = ly - deltaT * (K * lx * lx + (detune - amplitude)) * lx;
     }
 
     x[idx] = lx;
     y[idx] = ly;
+    __syncthreads();
 }
 
 class Accelerator
 {
 private:
-    float *couplings, *couplings_buf;
-    uint *randvals_buf, *randvals;
-    float *x, *x_buf, *y, *y_buf;
+    float *couplings_pinned, *couplings_buf;
+    uint *randvals_pinned, *randvals_buf;
+    float *x_pinned, *x_buf, *y_pinned, *y_buf;
+    int *spin_pinned, *spin_buf;
+    int *E_buf, *E;
 
     cublasHandle_t handle;
 
     float coeff1 = DeltaT * xi;
     float coeff2 = 1.;
+    int *results;
     dim3 grid, block;
 
     void init_coeff(std::string);
@@ -99,26 +108,30 @@ private:
     void init_randNum();
     void init_points();
 
-    result calEnergy();
-    void iter(int, double &);
+    void step(int);
 
 public:
     Accelerator(std::string);
     ~Accelerator();
-    int run(int);
+    void run(int, int);
     void output(result *, std::string);
     void print_energyOnHost(float *, float *, float *, double, int);
 };
 
 void Accelerator::init_coeff(std::string fileName)
 {
-    couplings = (float *)malloc(N * N * sizeof(float));
-    memset(couplings, '\0', N * N * sizeof(float));
+    gpuErrchk(cudaMallocHost((void **)&couplings_pinned, (N * N * sizeof(float))));
+    memset(couplings_pinned, '\0', N * N * sizeof(float));
     gpuErrchk(cudaMalloc(&couplings_buf, N * N * sizeof(float)));
+
+    gpuErrchk(cudaMallocHost((void **)&spin_pinned, (N * sizeof(int))));
+    gpuErrchk(cudaMalloc((void **)&spin_buf, (N * 16 * sizeof(int))));
+    gpuErrchk(cudaMalloc((void **)&E_buf, (N * sizeof(int))));
+    gpuErrchk(cudaMalloc((void **)&E, (sizeof(int))));
 
     read_file(fileName);
 
-    gpuErrchk(cudaMemcpy(couplings_buf, couplings, N * N * sizeof(float), cudaMemcpyHostToDevice));
+    gpuErrchk(cudaMemcpy(couplings_buf, couplings_pinned, N * N * sizeof(float), cudaMemcpyHostToDevice));
 }
 
 // Read couplings file
@@ -140,71 +153,90 @@ void Accelerator::read_file(std::string fileName)
     {
         file >> a >> b >> w;
         assert(a != b); // not dealing with external field
-        couplings[a * N + b] = w;
-        couplings[b * N + a] = w;
+        couplings_pinned[a * N + b] = w;
+        couplings_pinned[b * N + a] = w;
     }
     file.close();
 }
 
 void Accelerator::init_randNum()
 {
-    randvals = (uint *)malloc(N * sizeof(uint));
+    gpuErrchk(cudaMallocHost((void **)&randvals_pinned, (N * sizeof(uint))));
     gpuErrchk(cudaMalloc(&randvals_buf, N * sizeof(uint)));
     for (int i = 0; i < N; i++)
-        randvals[i] = i;
-    gpuErrchk(cudaMemcpy(randvals_buf, randvals, N * sizeof(uint), cudaMemcpyHostToDevice));
+        randvals_pinned[i] = i;
+    gpuErrchk(cudaMemcpy(randvals_buf, randvals_pinned, N * sizeof(uint), cudaMemcpyHostToDevice));
 }
 
 // initialize points
 void Accelerator::init_points()
 {
-    x = (float *)malloc(N * sizeof(float));
-    gpuErrchk(cudaMalloc(&x_buf, N * sizeof(float)));
-    y = (float *)malloc(N * sizeof(float));
-    gpuErrchk(cudaMalloc(&y_buf, N * sizeof(float)));
+    gpuErrchk(cudaMallocHost((void **)&x_pinned, (N * 16 * sizeof(float))));
+    gpuErrchk(cudaMalloc(&x_buf, N * 16 * sizeof(float)));
+    gpuErrchk(cudaMallocHost((void **)&y_pinned, (N * 16 * sizeof(float))));
+    gpuErrchk(cudaMalloc(&y_buf, N * 16 * sizeof(float)));
 }
 
-result Accelerator::calEnergy()
+__global__ void calSpin(float *x_buf, int *spin_buf)
 {
-    int E = 0;
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    spin_buf[idx] = x_buf[idx] > 0.0 ? 1 : -1;
+}
+
+__global__ void calEnergy(int *spin_buf, int *E_buf, float *couplings_buf)
+{
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int E = E_buf[idx] = 0;
     for (int i = 0; i < N; i++)
     {
-        for (int j = i + 1; j < N; j++)
-        {
-            int a = x[i] > 0.0 ? 1 : -1;
-            int b = x[j] > 0.0 ? 1 : -1;
-            E += a * b * couplings[i * N + j];
-        }
+        E += spin_buf[i] * spin_buf[idx] * couplings_buf[i * N + idx];
     }
-    return result(-E);
+    E_buf[idx] = E;
+    for (int i = 0; i < 15; i++)
+    {
+        if ((idx >> i) % 2 == 0)
+            E_buf[idx] += E_buf[idx + 1 << i];
+        __syncthreads();
+    }
+}
+__global__ void energy(int *E, int *E_buf)
+{
+    E[0] = E_buf[0];
 }
 
 // n step iter for a run
-int Accelerator::run(int n)
+void Accelerator::run(int times, int steps)
 {
-    prepare_points<<<grid, block>>>(x_buf, y_buf, randvals_buf);
+    results = (int *)malloc(times * sizeof(int));
+    for (int t = 0; t < times; t++)
+    {
+        prepare_points<<<grid, block>>>(x_buf, y_buf, randvals_buf);
+        for (int s = 0; s < steps; s++)
+            step(s);
 
-    double timer = 0.;
-    for (int i = 0; i < n; i++)
-        iter(i, timer);
+        // // Get Result from device
+        // gpuErrchk(cudaMemcpy(x_pinned, x_buf, N * sizeof(float), cudaMemcpyDeviceToHost));
 
-    printf("%lf\n", timer);
+        calSpin<<<grid, block>>>(x_buf, spin_buf);
+        calEnergy<<<grid, block>>>(spin_buf, E_buf, couplings_buf);
+        energy<<<grid, block>>>(E, E_buf);
+        int res = E[0];
+        printf("%d\n", res);
+        gpuErrchk(cudaMemcpy(&res, E, sizeof(int), cudaMemcpyDeviceToHost));
 
-    // Get Result from device
-    gpuErrchk(cudaMemcpy(x, x_buf, N * sizeof(float), cudaMemcpyDeviceToHost));
-
-    return calEnergy();
+        printf("%d\n", res);
+        results[t] = res;
+    }
 }
 
-void Accelerator::iter(int i, double &timer)
+void Accelerator::step(int i)
 {
     float amplitude = i / (float)STEP;
-    clock_t begin = clock();
     UpdateTwice<<<grid, block>>>(x_buf, y_buf, amplitude);
-    cublasSgemv(handle, CUBLAS_OP_N, N, N, &coeff1, couplings_buf, N, x_buf, 1, &coeff2, y_buf, 1);
-    clock_t end = clock();
-    double duration = (double)(end - begin) / CLOCKS_PER_SEC;
-    timer += duration;
+    cublasSgemv(handle, CUBLAS_OP_N, N, N, &coeff1,
+                couplings_buf, N,
+                x_buf, 1,
+                &coeff2, y_buf, 1);
 }
 
 // Write statistics to file
@@ -217,23 +249,14 @@ void Accelerator::output(result results[], std::string outName = "output.txt")
     file.close();
 }
 
-void Accelerator::print_energyOnHost(float *x, float *x_buf, float *couplings, double curr, int t)
-{
-    gpuErrchk(cudaMemcpy(x, x_buf, N * sizeof(float), cudaMemcpyDeviceToHost));
-    int E = 0;
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = i + 1; j < N; j++)
-        {
-            int a = x[i] > 0.0 ? 1 : -1;
-            int b = x[j] > 0.0 ? 1 : -1;
-            E += a * b * couplings[i * N + j];
-        }
-    }
-    printf("%d %lf %d\n", t, curr, -E);
-}
+// void Accelerator::print_energyOnHost(float *x, float *x_buf, float *couplings, double curr, int t)
+// {
+//     gpuErrchk(cudaMemcpy(x, x_buf, N * sizeof(float), cudaMemcpyDeviceToHost));
+//     int E = calEnergy();
+//     printf("%d %lf %d\n", t, curr, -E);
+// }
 
-Accelerator::Accelerator(string fileName) : grid(N / THREADS), block(THREADS)
+Accelerator::Accelerator(string fileName) : grid(N / THREADS), block(THREADS) //38 SMs on 3060Ti
 {
     init_coeff(fileName);
     init_randNum();
@@ -244,14 +267,16 @@ Accelerator::Accelerator(string fileName) : grid(N / THREADS), block(THREADS)
 
 Accelerator::~Accelerator()
 {
-    free(couplings);
-    free(x);
-    free(y);
-    free(randvals);
+    cudaFreeHost(couplings_pinned);
+    cudaFreeHost(x_pinned);
+    cudaFreeHost(y_pinned);
+    cudaFreeHost(randvals_pinned);
+    cudaFreeHost(spin_pinned);
     cudaFree(couplings_buf);
     cudaFree(x_buf);
     cudaFree(y_buf);
     cudaFree(randvals_buf);
+    cudaFree(spin_buf);
 }
 
 void usage()
@@ -274,7 +299,31 @@ int main(int argc, char *argv[])
 
     for (int t = 0; t < TIMES; t++)
     {
-        results[t] = acc.run(STEP);
+        double timer = 0.;
+        float gpu_timer = 0;
+        cudaEvent_t start, stop;
+
+        gpuErrchk(cudaEventCreate(&start));
+        gpuErrchk(cudaEventCreate(&stop));
+
+        gpuErrchk(cudaEventRecord(start, 0));
+        clock_t begin = clock();
+
+        acc.run(TIMES, STEP);
+
+        clock_t end = clock();
+
+        gpuErrchk(cudaEventRecord(stop, 0));
+        gpuErrchk(cudaEventSynchronize(stop));
+
+        gpuErrchk(cudaEventElapsedTime(&gpu_timer, start, stop));
+
+        gpuErrchk(cudaEventDestroy(start));
+        gpuErrchk(cudaEventDestroy(stop));
+
+        timer = (double)(end - begin) / CLOCKS_PER_SEC;
+        gpu_timer /= 1000;
+        printf("cpu elapse time:%6.6lf, gpu elapse time:%6.6lf\n", timer, gpu_timer);
     }
 
     acc.output(results);
