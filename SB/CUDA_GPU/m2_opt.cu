@@ -14,7 +14,7 @@
 namespace cg = cooperative_groups;
 
 // N defined here
-#define N 2048
+#define N 32768
 #define THREADS 512
 #define TIMES 10
 #define MAX 4294967295.0
@@ -182,11 +182,13 @@ __global__ void calSpin(float *x_buf, int *spin_buf)
     spin_buf[idx] = x_buf[idx] > 0.0 ? 1 : -1;
 }
 
-__device__ void energyReduce(int *E_buf, int idx, int i){
-    if ((idx >> i) % 2 == 0) E_buf[idx] += E_buf[idx + (1 << i)];
+__device__ void _energyReduce(int *E_buf, int idx, int i)
+{
+    if ((idx / i) % 2 == 0)
+        E_buf[idx] += E_buf[idx + i];
 }
 
-__global__ void calEnergy(int *spin_buf, int *E_buf, float *couplings_buf)
+__global__ void calSpinEnergy(int *spin_buf, int *E_buf, float *couplings_buf)
 {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     int E = 0;
@@ -195,13 +197,17 @@ __global__ void calEnergy(int *spin_buf, int *E_buf, float *couplings_buf)
         E += spin_buf[idx] * spin_buf[i] * couplings_buf[idx * N + i];
     }
     E_buf[idx] = E;
-    __syncthreads();
-    for (int i = 0; i < 15; i++)
-    {
-        energyReduce(E_buf, idx, i);
-    }
 }
 
+__global__ void energyReduce(int *E_buf)
+{
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    for (int i = 0; i < 15; i++)
+    {
+        _energyReduce(E_buf, idx, 1 << i);
+        __syncthreads();
+    }
+}
 
 // n step iter for a run
 void Accelerator::run(int times, int steps)
@@ -217,11 +223,12 @@ void Accelerator::run(int times, int steps)
         // gpuErrchk(cudaMemcpy(x_pinned, x_buf, N * sizeof(float), cudaMemcpyDeviceToHost));
 
         calSpin<<<grid, block>>>(x_buf, spin_buf);
-        calEnergy<<<grid, block>>>(spin_buf, E_buf, couplings_buf);
-        
+        calSpinEnergy<<<grid, block>>>(spin_buf, E_buf, couplings_buf);
+        energyReduce<<<grid, block>>>(E_buf);
+
         gpuErrchk(cudaMemcpy(E, E_buf, sizeof(int), cudaMemcpyDeviceToHost));
 
-        int res=E[0];
+        int res = E[0];
         printf("%d\n", res);
         results[t] = res;
     }
@@ -298,7 +305,6 @@ int main(int argc, char *argv[])
 
     result results[TIMES];
 
-    
     double timer = 0.;
     float gpu_timer = 0;
     cudaEvent_t start, stop;
