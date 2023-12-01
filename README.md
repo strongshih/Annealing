@@ -10,9 +10,9 @@ The Hamiltonian of an Ising problem can be formulated as:
 
 $$ H = -\sum_{i,j} J_{ij} s_i s_j - \sum_i h_i s_i $$
 
-where $s_i \in \{-1, 1\}$ is the spin, $J_{ij}$ is the coupling strength between spin $s_i$ and $s_j$, and $h_i$ is the local field for $s_i.
+where $s_i \in \{-1, 1\}$ is the spin, $J_{ij}$ is the coupling strength between spin $s_i$ and $s_j$, and $h_i$ is the local field for $s_i$.
 
-The problem is to find $s_i$ minimizing $H.
+The problem is to find $s_i$ minimizing $H$.
 
 ## Methods
 
