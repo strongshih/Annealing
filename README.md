@@ -1,4 +1,10 @@
-# Ising Problem [[1]](#1).
+# Solving combinatorial problems
+
+This project intends to provide a universal interface for solving combinatorial problems across multiple different platforms
+
+![](./images/structure.png).
+
+## Ising Problem [[1]](#1).
 
 The Hamiltonian of an Ising problem can be formulated as:
 
